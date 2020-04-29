@@ -48,10 +48,74 @@ paths:
                     required:
                       - id
                       - name
+  '/getSubject{id}':
+    get:
+      summary: getSubject
+      description: Request for getting student
+      tags:
+        - Subject
+      parameters:
+        - name: id
+          in: path
+          description: Subject ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  Student:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        format: int64
+                      name:
+                        type: string
+                    required:
+                      - id
+                      - name
+  '/getStudent{id}':
+    get:
+      summary: getStudentByID
+      description: Request for getting student
+      tags:
+        - Student
+      parameters:
+        - name: id
+          in: path
+          description: Student ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  Student:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        format: int64
+                      name:
+                        type: string
+                    required:
+                      - id
+                      - name
   /auth:
     post:
       summary: JWT токен
-      description: Выдача токена
+      description: Выдаёт токен пользователю для осуществления операций
       tags:
         - Auth
       security: []
@@ -62,15 +126,12 @@ paths:
               properties:
                 email:
                   type: string
-                  example: sample@gmail.com
+                  example: i.i@gmail.com
                 password:
                   type: string
-                  example: 1p2A3ss_Wo4d
+                  example: 1p2aSs_Wo4D
       responses:
         '200':
-          headers:
-            Api-Token:
-              $ref: '#/components/headers/Api-Token'
           description: OK
           content:
             applications/json:
@@ -99,18 +160,29 @@ paths:
                           example: Не указан пароль
     x-components:
       headers:
-        Api-Token: &ref_1
+        Api-Token:
           schema:
             type: string
             example: 9f34dd3a-ff8d-43aa-b286-9f22555319f6
       schemas:
-        $ref: 'components/schemas/User'
+        User: &ref_0
+          type: object
+          properties:
+            id:
+              type: string
+              example: 41
+            name:
+              type: string
+              example: Ivan Ilinov
+            email:
+              type: string
+              example: i.i@gmail.com
   /register:
     post:
       summary: Регистрация пользователя
-      description: Регестрирует пользователя в системе
+      description: Регистрирует пользователя в системе
       tags:
-        - Auth
+        - Register
       security: []
       requestBody:
         content:
@@ -120,10 +192,10 @@ paths:
               properties:
                 email:
                   type: string
-                  example: sample@gmail.com
+                  example: i.i@gmail.com
                 password:
                   type: string
-                  example: 1p2A3ss_Wo4d
+                  example: 1p2aSs_Wo4d
       responses:
         '200':
           description: OK
@@ -137,10 +209,10 @@ paths:
                     properties:
                       name:
                         type: string
-                        example: Ivan
+                        example: Ivan Ilinov
                       email:
                         type: string
-                        example: i.ik@mail.ru
+                        example: o.o@gmail.com
 components:
   securitySchemes:
     bearerAuth:
@@ -149,5 +221,3 @@ components:
       bearerFormat: JWT
   schemas:
     User: *ref_0
-  headers:
-    Api-Token: *ref_1
