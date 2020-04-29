@@ -1,0 +1,35 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: REST API
+  contact:
+    name: Ivan
+    email: i.am.ivan.ilinov@gmail.com
+servers:
+  - url: 'https://example.com/v1.0'
+    description: Live Server
+tags:
+  - name: Раздел
+    description: |
+      API for Educational System
+security:
+  - SecretApiKey: []
+  - JWT: []
+paths:
+  /getStudents{id}:
+    $ref: ./paths/getStudents.yaml
+  /getSubject{id}:
+    $ref: ./paths/getSubject.yaml
+  /getStudent{id}:
+    $ref: ./paths/getStudent.yaml
+  /auth:
+    $ref: ./paths/auth.yaml
+  /register:
+    $ref: ./paths/createuser.yaml
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

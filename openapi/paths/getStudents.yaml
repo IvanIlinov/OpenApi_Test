@@ -1,0 +1,31 @@
+get:
+  summary: "getStudentByID"
+  description: "Request for getting student"
+  tags:
+    - Student
+  parameters:
+      - name: id
+        in: path
+        description: Student ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+  responses:
+    '200':
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            properties:
+              Student:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                  name:
+                    type: string
+                required:
+                  - id
+                  - name
