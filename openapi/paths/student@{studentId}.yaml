@@ -1,0 +1,230 @@
+get:
+  summary: "Get Student by Id"
+  description: "Request for getting student by Id"
+  tags:
+    - Student
+  parameters:
+    - name: studentId
+      in: path
+      description: >-
+        Student identifier
+      schema:
+        type: integer
+        minimum: 0
+        description: The resource ID
+        example: 15
+      required: true
+  responses:
+    '200':
+      description: Successful operation
+        content:
+          application/json:
+            schema:
+              type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                  name:
+                    type: string
+                required:
+                  - id
+                  - name
+    '404':
+      description: Resource was not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                minimum: 100
+                maximum: 600
+                description: The HTTP status code.
+              error:
+                type: string
+              type:
+                type: string
+                description: >-
+                  A URI reference [[RFC3986](https://tools.ietf.org/html/rfc3986)] that
+                  identifies the problem type. It should provide human-readable
+                  documentation for the problem type. When this member is not present, its
+                  value is assumed to be "about:blank".
+              title:
+                type: string
+                description: >-
+                  A short, human-readable summary of the problem type. It SHOULD NOT change
+                  from occurrence to occurrence of the problem, except for purposes of
+                  localization.
+
+patch:
+  summary: "Update Student entity"
+  description: "Request for update information about a Student entity"
+  operationId: "updateStudent"
+  tags:
+    - Student
+  parameters:
+    - name: studentId
+      in: path
+      description: >-
+        Student identifier
+      schema:
+        type: integer
+        minimum: 0
+        description: The resource ID
+        example: 15
+      required: true
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+            name:
+              type: string
+          required:
+            - id
+            - name
+    description: Student object
+    required: true
+  responses:
+    '200':
+      description: Student was updated
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+              name:
+                type: string
+            required:
+              - id
+              - name
+    '422':
+      description: Invalid data was sent
+      content:
+        application/json:
+          schema:
+            description: Invalid data was sent
+            allOf:
+              - type: object
+                properties:
+                  status:
+                    type: integer
+                    minimum: 100
+                    maximum: 600
+                    description: The HTTP status code.
+                  error:
+                    type: string
+                  type:
+                    type: string
+                    description: >-
+                      A URI reference [[RFC3986](https://tools.ietf.org/html/rfc3986)] that
+                      identifies the problem type. It should provide human-readable
+                      documentation for the problem type. When this member is not present, its
+                      value is assumed to be "about:blank".
+                  title:
+                    type: string
+                    description: >-
+                      A short, human-readable summary of the problem type. It SHOULD NOT change
+                      from occurrence to occurrence of the problem, except for purposes of
+                      localization.
+              - type: object
+                properties:
+                  invalidFields:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                          description: >-
+                            The field name. Dot notation is used for nested object field
+                            names.
+                        message:
+                          type: string
+                    example:
+                      - field: field1
+                        message: field1 is invalid
+                      - field: subObject.field2
+                        message: field2 is invalid
+                      - field: subObject.field2
+                        message: another error in the field2
+
+delete:
+  summary: "Delete Student"
+  description: "Request for delete information about a Student"
+  operationId: "deleteStudent"
+  tags:
+      - Student
+  parameters:
+    - name: studentId
+      in: path
+      description: >-
+        Student identifier
+      schema:
+        type: integer
+        minimum: 0
+        description: The resource ID
+        example: 15
+      required: true
+  responses:
+    '200':
+      description: Student was deleted
+    '422':
+      description: Invalid data was sent
+      content:
+        application/json:
+          schema:
+            description: Invalid data was sent
+            allOf:
+              - type: object
+                properties:
+                  status:
+                    type: integer
+                    minimum: 100
+                    maximum: 600
+                    description: The HTTP status code.
+                  error:
+                    type: string
+                  type:
+                    type: string
+                    description: >-
+                      A URI reference [[RFC3986](https://tools.ietf.org/html/rfc3986)] that
+                      identifies the problem type. It should provide human-readable
+                      documentation for the problem type. When this member is not present, its
+                      value is assumed to be "about:blank".
+                  title:
+                    type: string
+                    description: >-
+                      A short, human-readable summary of the problem type. It SHOULD NOT change
+                      from occurrence to occurrence of the problem, except for purposes of
+                      localization.
+              - type: object
+                properties:
+                  invalidFields:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                          description: >-
+                            The field name. Dot notation is used for nested object field
+                            names.
+                        message:
+                          type: string
+                    example:
+                      - field: field1
+                        message: field1 is invalid
+                      - field: subObject.field2
+                        message: field2 is invalid
+                      - field: subObject.field2
+                        message: another error in the field2

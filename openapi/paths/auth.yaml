@@ -4,9 +4,11 @@ post:
   tags: ['Auth']
   security: []
   requestBody:
+  #can be ref
     content:
       application/json:
         schema:
+        #can be ref
           properties:
             email:
               type: string
@@ -14,20 +16,36 @@ post:
             password:
               type: string
               example: "1p2aSs_Wo4D"
+    description: User object
+    required: true
   responses:
     "200":
+      #can be ref
       description: OK
       content:
         applications/json:
           schema:
+          #can be ref
             properties:
               user:
-                $ref: "#/x-components/schemas/User"
+                type: object
+                  properties:
+                    id:
+                      type: string
+                      example: 41
+                    name:
+                      type: string
+                      example: "Ivan Ilinov"
+                    email:
+                      type: string
+                      example: "i.i@gmail.com"
     '422':
+    #can be ref
       description: "Ошибка авторизации"
       content:
         application/json:
          schema:
+         #can be ref
             properties:
               errors:
                 type: object
@@ -42,24 +60,3 @@ post:
                     items:
                       type: string
                       example: "Не указан пароль"
-
-x-components:
-  headers:
-    Api-Token:
-      schema:
-        type: string
-        example: "9f34dd3a-ff8d-43aa-b286-9f22555319f6"
-
-  schemas:
-    User:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 41
-        name:
-          type: string
-          example: "Ivan Ilinov"
-        email:
-          type: string
-          example: "i.i@gmail.com"
