@@ -17,33 +17,21 @@ security:
   - JWT: []
 paths:
 #1.Регистрация
-  /register:
+  /createuser:
     $ref: ./paths/createuser.yaml
 #2.Авторизация
   /auth:
     $ref: ./paths/auth.yaml
 #3.Студент (CRUD+ReadAll)
-  /createStudent:
-    $ref: ./paths/student/createStudent.yaml
-  /updateStudent{id}:
-    $ref: ./paths/student/updateStudent.yaml
-  /deleteStudent{id}:
-    $ref: ./paths/student/deleteStudent.yaml
-  /getStudent{id}:
-    $ref: ./paths/student/getStudent.yaml
-  /getStudents:
-    $ref: ./paths/student/getStudents.yaml
+  /students:
+    $ref: ./paths/students.yaml
+  /student/{studentId}:
+    $ref: ./paths/student@{studentId}.yaml
 #4.Предмет (CRUD+ReadAll)
-  /createSubject:
-    $ref: ./paths/subject/createSubject.yaml
-  /updateSubject{id}:
-    $ref: ./paths/subject/updateSubject.yaml
-  /deleteSubject{id}:
-    $ref: ./paths/subject/deleteSubject.yaml
-  /getSubject{id}:
-    $ref: ./paths/subject/getSubject.yaml
-  /getSubjects:
-    $ref: ./paths/subject/getSubjects.yaml  
+  /subjects:
+    $ref: ./paths/subjects.yaml
+  /subject/{subjectId}:
+    $ref: ./paths/subject@{subjectId}.yaml
 
 components:
   securitySchemes:

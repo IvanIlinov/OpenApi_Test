@@ -32,3 +32,24 @@ post:
                   email:
                     type: string
                     example: "o.o@gmail.com"
+    '422':
+      #can be ref
+      description: "Ошибка регистрации"
+      content:
+        application/json:
+          schema:
+            #can be ref
+            properties:
+              errors:
+                type: object
+                properties:
+                  email:
+                    type: array
+                    items:
+                      type: string
+                      example: "Не указан Email"
+                  password:
+                    type: array
+                    items:
+                      type: string
+                      example: "Не указан пароль"
