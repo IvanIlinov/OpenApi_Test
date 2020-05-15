@@ -25,20 +25,19 @@ post:
       content:
         applications/json:
           schema:
-          #can be ref
             properties:
               user:
                 type: object
-                  properties:
-                    id:
-                      type: string
-                      example: 41
-                    name:
-                      type: string
-                      example: "Ivan Ilinov"
-                    email:
-                      type: string
-                      example: "i.i@gmail.com"
+                properties:
+                  email:
+                    type: string
+                  pppp:
+                    type: string
+                example:
+                  email: "user1@gmail.com"
+                  pppp: "qwerty321123"
+                      
+                      
     '422':
     #can be ref
       description: "Ошибка авторизации"

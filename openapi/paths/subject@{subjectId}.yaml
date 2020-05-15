@@ -17,19 +17,19 @@ get:
   responses:
     '200':
       description: Successful operation
-        content:
-          application/json:
-            schema:
-              type: object
-                properties:
-                  id:
-                    type: integer
-                    format: int64
-                  name:
-                    type: string
-                required:
-                  - id
-                  - name
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+              name:
+                type: string
+            required:
+              - id
+              - name
     '404':
       description: Resource was not found
       content:
@@ -157,7 +157,6 @@ patch:
                         message: field2 is invalid
                       - field: subObject.field2
                         message: another error in the field2
-
 delete:
   summary: "Delete Subject"
   description: "Request for delete information about a Subject"
